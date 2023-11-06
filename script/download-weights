@@ -4,7 +4,7 @@
 import os
 import sys
 import torch
-from diffusers import DiffusionPipeline
+from diffusers import DiffusionPipeline, StableDiffusionSafetyChecker
 
 # append project directory to path so predict.py can be imported
 sys.path.append('.')
@@ -21,3 +21,9 @@ pipe = DiffusionPipeline.from_pretrained(
     use_safetensors=True,
     cache_dir=SDXL_MODEL_CACHE,
 )
+
+safety = StableDiffusionSafetyChecker.from_pretrained(
+    "CompVis/stable-diffusion-safety-checker",
+    torch_dtype=torch.float16,
+)
+safety.save_pretrained("./safety-cache")
