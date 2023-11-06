@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+
+# Run this before you deploy it on replicate
+import os
+import sys
+import torch
+from diffusers import DiffusionPipeline
+
+# append project directory to path so predict.py can be imported
+sys.path.append('.')
+from predict import MODEL_NAME, SDXL_MODEL_CACHE
+
+# Make cache folders
+if not os.path.exists(SDXL_MODEL_CACHE):
+    os.makedirs(SDXL_MODEL_CACHE)
+
+# SD-XL-Base-1.0
+pipe = DiffusionPipeline.from_pretrained(
+    MODEL_NAME,
+    torch_dtype=torch.float16,
+    use_safetensors=True,
+    cache_dir=SDXL_MODEL_CACHE,
+)

@@ -1,0 +1,13 @@
+# Configuration for Cog ⚙️
+build:
+  gpu: true
+  python_version: "3.10"
+  system_packages:
+    - "libgl1-mesa-glx"
+  python_packages:
+    - "torch==2.0.1"
+    - "transformers"
+    - "diffusers"
+    - "accelerate"
+
+predict: "predict.py:Predictor"
